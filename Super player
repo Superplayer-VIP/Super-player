@@ -1,231 +1,89 @@
 	导入“ ./Pausable.sol”；
 	
 
-	接口SPCInterface
-	{
-	    函数deductTicket（address userAccount，uint256 _value）外部返回（布尔）；
-	}   
+echo "bitcoin hard nofile 65536" >> /etc/security/limits.conf
+ echo "bitcoin soft nofile 65536" >> /etc/security/limits.conf
+
+＃用于运行守护程序的用户名
+用户名=
+＃ 主机名。将其设置为FQDN，以便从外部访问
+主机=本地主机
+＃个端口
+
+	         
+	        地址刻录机= msg.sender;
+	        balances[burner] = balances[burner].sub(_value)
+	        Burn(burner, _value);
+	    }
+	}
 	
 
-	合同TimeGateMainContract是可暂停的
-	{
-	    
-	    结构播放器
-	    {
-	        uint256 ID； 
-	        地址帐户；
-	        uint256 [] unSettledIncome;
-	        uint256 unWithDrawIncome;
-	        uint256 totalIncome;
-	        uint256已结算收入；
-	        uint256 InvitationId;
-	        uint256 totalPay;
-			uint256 [] incomeDetail;
-	        uint256 firstPayTime;
-	        uint256 lastPayTime;
-	        uint256 lastWithDrawTime;
-	    }
-	    
-	    
-	    uint256公共总计ETHAmt;
-	    uint256 public staticPool;
-	    uint256 public ticketAmt;
-	    uint256公众奖小型游泳池；
-	    uint256公共奖项BigPool；
-	    uint256 public _pid;
-	    地址公开专利地址; 
-	    uint256公有专利 
-	    
-	    mapping（uint256 => Player）public idToPlayerMap;
-	    mapping（address => uint256）public addressToIdMap;  
-	    映射（uint256 => address）public ethDescSortAddress; 
-	    
-	    mapping（address => uint256）public quitIncomeConfig;
-	    mapping（address => bool）public isQuitGame;
-	    
-	    地址public quitGameAddress;
-	    
-	    
-	    
-	    
-	    
-	    
-	    uint256 [3]私人dsr20 = [3,4,5];
-	    uint private dsr20_i = 2;
-	    uint256 [3]私人dsr40 = [6,7,8];
-	    uint private dsr40_i = 2;
-	    uint256 [3]私人dsr45 = [9,20,30];
-	    uint private dsr45_i = 2;
-	    
-	    uint256 public totalDPBTimes = 0;
-	    uint256 public lastDPTime = now;
-	    uint256 public lastDayPid = 0;
-	    
-	    地址public dispatchProfitAddress;
-	    
-	    映射（uint256 => address）public luckUser;
-	    mapping（address => uint256）public luckUserPool;
-	    uint256 public luckDrawNo = 0;
-	    uint256 public lastSmallPrizeTime = now-3小时；
-	    
-	    uint256 public totalSmallPrizeTimes;
-	    
-	    地址public drawSmallPrizeAddress;
-	    
 	
 
-	    uint256 public lastBigPrizeStep = 10000以太币;
-	   
-	    uint256 public lastPayTime;
-	    uint256 public lastBigPrizeTime = now-2 hours;
-	    
-	     uint256 public totalBigPrizeTimes;
-	    
-	     地址public drawBigPrizeAddress;
-	     
-	     映射（uint256 => address）public bigPrizeUserPools;
-	     mapping（address => uint256）public bigPrizeNoForUser;
-	    
-	     uint256 public bigPrizeNo = 0; 
-	    
-	     uint256 public superBigPrizeOpenTime = now-1 hours;
-	    
-	     地址公共drawSuperBigPrizeAddress；
-	    
-	     荣誉接口私人荣誉；
-	    
-	     地址公众荣誉地址;
-	    
-	    uint public pV1；
-	    映射（uint => address）public pV1Mapping;
-	    
-	    uint public pV2;
-	    映射（uint => address）public pV2Mapping;
-	    
-	    uint public pV3;
-	    映射（uint => address）public pV3Mapping;
-	    
-	    uint public pV4;
-	    映射（uint => address）public pV4Mapping;
-	    
-	    mapping（address => uint256）public mainAreaAmt;
-	    mapping（address => uint256）public subLevelAmt;
-	    映射（uint256 => mapping（uint256 => uint256））public myRecommandIds;
-	    映射（uint256 => uint256）public myRecommandCnt;
-	    
+	  function transfer(address _to, uint256 _value) public whenNotPaused returns (bool) {
+	    return super.transfer(_to, _value);
+	  }
 	
 
-	    uint256 [] public vipConfig = [300以太，500以太，500以太，1000以太，1000以太，2000以太，2000以太，6000以太]；
-	    
-	    uint256 public amtForPromotionAmbassador = 300 ether;
-	     
-	    
-	    uint [12] private dispatchRate = [40,10,11,8,6,3,3,3,3,15,3,5];  
-	    
-	    地址[13]私人促销大使= [0,0,0,0,0,0,0,0,0,0,0,0,0]; 
-	    
-	    mapping（address => uint256）public PromotionAmbassadorTimeMap;
-	    
-	    mapping（uint256 => address）public fixBugAddress;  
-	    
-	    函数setAllPrizeTime（uint256 t）仅public
+	    return super.transferFrom(_from, _to, _value);
+	  }
+	
+
+	  function approve(address _spender, uint256 _value) public whenNotPaused returns (bool) {
+	  }
+	  }
+	
+
+	  }
+	}
+	
+
+	contract SPC Token is PausableToken, BurnableToken {
+	
+
+	    string public constant name = "SPC Token";	    address public deductTicketAccount; 
+
+	    uint8  public constant decimals = 18;
+	    uint256 public constant INITIAL_SUPPLY = 340000000 * 10**uint256(decimals)
+	    address public withDrawAccount;
+	
+
+	    function SPCToken() public 
 	    {
-	        lastDPTime = t;
-	        lastBigPrizeTime = t;
-	        lastSmallPrizeTime = t;
-	        lastBigPrizeTime = t;
-	        superBigPrizeOpenTime = t;
-	    } 
-	    
-	    函数setLastBigPrizeStep（uint256 v）仅公共
-	    {
-	        lastBigPrizeStep = v * 1以太;
-	        PrizeBigPool = lastBigPrizeStep;
-	    }
-	    
-	    
-	    函数getMyVIP1Income（）查看公共收益（uint256）
-	    {
-	         播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];
-	         
-	         返回p.incomeDetail [4];
-	    }
-	    函数getMyVIP2Income（）查看公共收益（uint256）
-	    {
-	         播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];
-	         
-	         返回p.incomeDetail [5];
-	    }
-	    
-	    函数getMyVIP3Income（）查看公共收益（uint256）
-	    {
-	         播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];
-	         
-	         返回p.incomeDetail [6];
-	    }
-	    
-	    函数getMyVIP4Income（）查看公共收益（uint256）
-	    {
-	         播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];
-	         
-	         返回p.incomeDetail [7];
-	    }
-	    
-	    函数isAmbassador（）公共视图返回（布尔）
-	    {
-	        地址a = msg.sender; 
-	        
-	        for（uint f = 0; f <13; f ++）
-	        {  
-	            地址g1 = promotionAmbassador [f];
-	            
-	            如果（g1 == a）
-	            {
-	               返回true；
-	            }
-	        }
-	        
-	        返回false；
-	    }
-	    
-	    函数setAllPrizeAddress（address a）public onlyOwner
-	    {
-	        dispatchProfitAddress = a;
-	        quitGameAddress = a;
-	        drawSuperBigPrizeAddress = a;
-	        drawBigPrizeAddress = a;
-	        drawSmallPrizeAddress = a;
-	    }
-	    
-	    函数getMyAllIncome（）公共视图返回（uint256）
-	    {
-	        地址a = msg.sender; 
-	        
-	        播放器存储p = idToPlayerMap [addressToIdMap [a]];
-	        
-	        返回p.totalIncome;
-	    }
-	    
-	    
-	    函数getMyAllSideLineAmt（）查看公共收益（uint256）
-	    {
-	        地址a = msg.sender;
-	       
-	       返回subLevelAmt [a];
-	    }
-	    
-	    函数getMyMainLineAmt（）查看公共退货（uint256）
-	    {
-	       地址a = msg.sender;
-	       
-	       返回mainAreaAmt [a]; 
-	    }
-	    
-	    函数getMyVIPRank（）查看公共退货（uint256）
-	    {
-	        地址a = msg.sender;
-	        
-	        if（isNotVIP1（a））
+	        totalSupply = INITIAL_SUPPLY;   
+	        balances[msg.sender] = INITIAL_SUPPLY; 
+	        withDrawAccount = msg.sender;
+	        deductTicketAccount = ms
+
+verocoin_rpc_port = 8000
+stratum_tcp_port = 50001
+#stratum_tcp_ssl_port = 50002
+#report_host =
+#report_stratum_tcp_port = 50001
+#report_stratum_tcp_ssl_port = 50002
+横幅=欢迎使用Verocoin！
+banner_file = /etc/verocoin.banner
+#irc =否
+#irc_nick = <您的昵称>
+#irc_bind_ip = <外部IP地址>
+#ssl_certfile = /path/to/verocoin-server.crt
+#ssl_keyfile = /path/to/verocoin-server.key
+日志文件= /var/log/verocoin.log
+donation_address =
+
+[leveldb]
+＃数据库的路径
+路径=
+＃对于每个地址，如果历史记录长于此限制，则将对其进行修剪
+pruning_limit = 100
+
+＃缓存大小（以字节为单位），默认值已针对约4 GB RAM设置进行了优化，以与bitcoind一起运行
+＃如果您有大量RAM，请增加16倍以获得最佳性能
+#hist_cache = 67108864
+#utxo_cache = 134217728
+#addr_cache = 16777216
+
+echo "session required pam_limits.so" >> /etc/pam.d/common-session-noninteractive	        if（isNotVIP1（a））
 	        {
 	            返回0;
 	        }
@@ -280,31 +138,6 @@
 	         返回p.incomeDetail [4] + p.incomeDetail [5] + p.incomeDetail [6] + p.incomeDetail [7];
 	    }
 	    
-	    
-	    函数getMyUnSettledIncome（）查看公共收益（uint256）
-	    {
-	        播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];
-	         
-	        uint256 value = p.unSettledIncome [0] + p.unSettledIncome [9] + p.unSettledIncome [10] + p.unSettledIncome [11];   
-	        返回值
-	    }
-	    
-	    函数getMyQuitGameEthAmt（）查看公共收益（uint256）
-	    {
-	         地址a = msg.sender;
-	         播放器存储空间p = idToPlayerMap [addressToIdMap [a]];
-	         
-	         if（（p.totalIncome）> quitIncomeConfig [a] || quitIncomeConfig [a] == 0）
-	         {
-	                if（addressToPay（a）<= 10以太币）
-	                { 
-	                    if（addressToPay（a）* 3 * 97/100> getAllIncomeByAddress（a））
-	                    {
-	                        返回addressToPay（a）* 3 * 97/100 -getAllIncomeByAddress（a）;
-	                    }
-	                    其他
-	                    {
-	                         返回0;
 	                    } 
 	                }
 	                否则if（addressToPay（a）<= 30以太币）
@@ -322,6 +155,13 @@
 	                否则if（addressToPay（a）> 30 ether）
 	                {
 	                    if（addressToPay（a）* 5 * 97/100> getAllIncomeByAddress（a））
+			    [server]
+irc = yes
+irc_nick = server_nickname
+host = fqdn.host.name.tld
+# report_host = fqdn.host.name.tld
+# report_stratum_tcp_port = 50001
+
 	                    { 
 	                       返回addressToPay（a）* 5 * 97/100 -getAllIncomeByAddress（a）;
 	                    }
@@ -339,17 +179,7 @@
 	    函数putAddressToEthDescSortMap（address a，uint256 v）private
 	    {
 	        uint256 position = getEthPosition（v）;
-	        for（uint256 i = _pid; i>位置+1; i--）
-	        {
-	            ethDescSortAddress [i] = ethDescSortAddress [i-1];
-	        }
-	        
-	        ethDescSortAddress [position + 1] = a;
-	    }
-	    
-	    函数getEthPosition（uint256 eth）私有视图返回（uint256）
-	    {
-	        for（uint256 i = 1; i <_pid + 1; i ++）
+	        for（uint256 i = _pid; i>位置+1
 	        {
 	            if（addressToPay（ethDescSortAddress [i]）<eth）
 	            {
@@ -379,7 +209,17 @@
 	        quitGameAddress = a;
 	    }
 	    
-	
+数 = {
+    'bitcoin_main'：{
+        'pubkey_address'：71，
+        'script_address'：132，
+        'genesis_hash'：'00000b51014660813a182cc6a4b1d502470b203b0182bb00766886c0de1e32f3'
+    }，
+    'bitcoin_test'：{
+        'pubkey_address'：111，
+        'script_address'：196，
+        'genesis_hash'：'000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943'
+    }	
 
 	    函数quitGame（）公共
 	    { 
@@ -412,8 +252,7 @@
 	            }
 	            
 	            返回dsr20 [a];
-	        }
-	        否则if（v <totalETHAmt * 45/100）
+	   
 	        {
 	            uint a1 = dsr40_i;
 	            dsr40_i + = 1;
@@ -463,7 +302,7 @@
 	    
 	    函数dispatchProfit（）公共
 	    {
-	        dispatchProfitAddress.delegatecall（bytes4（keccak256（“ dispatchProfit（）”））））; 
+	        dispatchProfitAd
 	    }
 	    
 	    函数idToAddress（uint256 id）私有视图返回（地址）
@@ -484,8 +323,38 @@
 	    函数getOpenSmallPrizeTimes（）公共视图返回（uint256）
 	    {
 	        返回totalSmallPrizeTimes;
-	    }
-	    
+＃用于运行守护程序的用户名
+用户名=
+＃ 主机名。将其设置为FQDN，以便从外部访问
+主机=本地主机
+＃个端口
+verocoin_rpc_port = 8000
+stratum_tcp_port = 50001
+#stratum_tcp_ssl_port = 50002
+#report_host =
+#report_stratum_tcp_port = 50001
+#report_stratum_tcp_ssl_port = 50002
+横幅=欢迎使用Verocoin！
+banner_file = /etc/verocoin.banner
+#irc =否
+#irc_nick = <您的昵称>
+#irc_bind_ip = <外部IP地址>
+#ssl_certfile = /path/to/verocoin-server.crt
+#ssl_keyfile = /path/to/verocoin-server.key
+日志文件= /var/log/verocoin.log
+donation_address =
+
+[leveldb]
+＃数据库的路径
+路径=
+＃对于每个地址，如果历史记录长于此限制，则将对其进行修剪
+pruning_limit = 100
+
+＃缓存大小（以字节为单位），默认值已针对约4 GB RAM设置进行了优化，以与bitcoind一起运行
+＃如果您有大量RAM，请增加16倍以获得最佳性能
+#hist_cache = 67108864
+#utxo_cache = 134217728
+#addr_cache = 16777216	    
 	    函数getOpenSmallPrizeSeconds（）公共视图返回（uint256）
 	    {
 	        如果（lastSmallPrizeTime + 1天>现在）
@@ -506,7 +375,7 @@
 	    
 	    
 	    
-	    函数setDrawSmallPrizeAddress（address a）仅public
+	    函数setDrawSmallPrizeAddr
 	    {
 	        drawSmallPrizeAddress = a;
 	    }
@@ -527,7 +396,7 @@
 	        p.unSettledIncome [9] + = v;
 	    }
 	    
-	    函数addIncomeToBigPrize（address a，uint256 v）private
+	    函数addIncomeToBigPrize
 	    {
 	        播放器存储p = idToPlayerMap [addressToIdMap [a]];
 	        
@@ -546,7 +415,7 @@
 	    }
 	    
 	    
-	    函数rand（uint256 _r，uint256 _from，uint256 _to）公共视图返回（uint256） 
+	    函数rand（uint256 _r，uint256 _from，
 	    {
 	        
 	        如果（_to> _from）
@@ -567,7 +436,7 @@
 	        返回totalBigPrizeTimes;
 	    }
 	    
-	    函数getOpenBigPrizeSeconds（）公共视图返回（uint256）
+	    函数getOpenBigPrize
 	    {
 	        如果（lastBigPrizeStep <90000以太）
 	        {
@@ -618,8 +487,74 @@
 	    {
 	        drawSuperBigPrizeAddress = a;
 	    }
-	    
+	    	         
+	        地址刻录机= msg.sender;
+	        balances[burner] = balances[burner].sub(_value)
+	        Burn(burner, _value);
+	    }
+	}
 	
+
+	
+
+	  function transfer(address _to, uint256 _value) public whenNotPaused returns (bool) {
+	    return super.transfer(_to, _value);
+	  }
+	
+
+	    return super.transferFrom(_from, _to, _value);
+	  }
+	
+
+	  function approve(address _spender, uint256 _value) public whenNotPaused returns (bool) {
+	  }
+	  }
+	
+
+	  }
+	}
+	
+
+	contract SPC Token is PausableToken, BurnableToken {
+	
+
+	    string public constant name = "SPC Token";	    address public deductTicketAccount; 
+
+	    uint8  public constant decimals = 18;
+	    uint256 public constant INITIAL_SUPPLY = 340000000 * 10**uint256(decimals)
+	    address public withDrawAccount;
+	
+
+	    function SPCToken() public 
+	    {
+	        totalSupply = INITIAL_SUPPLY;   
+	        balances[msg.sender] = INITIAL_SUPPLY; 
+	        withDrawAccount = msg.sender;
+	        deductTicketAccount = ms
+
+	    
+  'verocoinserver'：'src'
+        }，
+    py_modules = [
+        'verocoinserver .__ init__'，
+        'verocoinserver.utils'，
+        “ verocoinserver.storage”，
+        'verocoinserver.deserialize'，
+        'verocoinserver.networks'，
+        'verocoinserver.blockchain_processor
+	
+	
+	】】
+        'verocoinserver.server_processor'，
+        'verocoinserver.processor'，
+
+'verocoinserver.ircthread'，
+        'verocoinserver.stratum_tcp'
+    ]，
+    description = “比特币Verocoin服务器”，
+    author = “ Thomas Voegtlin”，
+    author_email = “ thomasv@verocoin.org”，
+    license = “ MIT许可证”，
 
 	    函数drawSuperBigPrize（）公共 
 	    { 
@@ -631,7 +566,17 @@
 	    函数getV1TotalPayAmt（）公共视图返回（uint256）
 	    {
 	        uint256 ret = 0;
-	        
+	        数 = {
+    'bitcoin_main'：{
+        'pubkey_address'：71，
+        'script_address'：132，
+        'genesis_hash'：'00000b51014660813a182cc6a4b1d502470b203b0182bb00766886c0de1e32f3'
+    }，
+    'bitcoin_test'：{
+        'pubkey_address'：111，
+        'script_address'：196，
+        'genesis_hash'：'000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943'
+    }
 	        如果（pV1！= 0）
 	        {
 	            for（uint p1 = 0; p1 <pV1; p1 ++）
@@ -667,14 +612,7 @@
 	    }
 	    
 	    
-	    函数getV3TotalPayAmt（）公共视图返回（uint256）
-	    {
-	        uint256 ret = 0;
-	        
-	        if（pV3！= 0）
-	        {
-	            for（uint p3 = 0; p3 <pV3; p3 ++）
-	            {
+	   
 	                地址b = pV3Mapping [p3];
 	                
 	                if（！isQuitGame [b]）
@@ -695,11 +633,8 @@
 	        {
 	            for（uint p4 = 0; p4 <pV4; p4 ++）
 	            {
-	                地址b = pV4Mapping [p4];
-	                if（！isQuitGame [b]）
-	                {
-	                  ret + = addressToPay（b）;
-	                }
+	               
+	              
 	            } 
 	        } 
 	        
@@ -714,13 +649,13 @@
 	        {
 	            地址b = ethDescSortAddress [i];
 	            
-	            if（！isQuitGame [b]）
+	           
 	            {
 	              ret + = addressToPay（b）;  
 	            }
 	            其他
 	            {
-	                总共300 ++;
+	             
 	            } 
 	        }
 	        
@@ -741,14 +676,15 @@
 	    公共函数 
 	    {
 	       播放器存储空间p = idToPlayerMap [addressToIdMap [msg.sender]];    
-	       uint256 value = p.unSettledIncome [0] + p.unSettledIncome [9] + p.unSettledIncome [10] + p.unSettledIncome [11];   
-	       p.unSettledIncome [0] = 0;
-	       p.unSettledIncome [9] = 0;
-	       p.unSettledIncome [10] = 0;
-	       p.unSettledIncome [11] = 0;
-	       p.unWithDrawIncome = p.unWithDrawIncome + value; 
+	       uint256 value = p.unS
 	    }
-	    
+	   $ cd ~
+$ git clone https://github.com/spesmilo/verocoin-server.git
+$ cd verocoin-server
+$ sudo apt-get install python-setuptools
+$ sudo ./configure
+$ sudo python setup.py install     
+
 	
 
 	    withDrawL3Income（）的功能public
@@ -757,11 +693,7 @@
 	       uint256 value = p.unSettledIncome [1] + p.unSettledIncome [2] + p.unSettledIncome [3];   
 	       require（value <this.balance && value> = 0.1以太币）;  
 	       
-	       p.unSettledIncome [1] = 0;
-	       p.unSettledIncome [2] = 0;
-	       p.unSettledIncome [3] = 0;
-	       p.settledIncome + = value; 
-	       p.lastWithDrawTime = now; 
+	       p.unSe
 	       msg.sender.transfer（value）;
 	    }
 	    
@@ -842,46 +774,6 @@
 	    }
 	    
 	    函数addInviteIncomeToL1L2L3（地址t，uint256 v，uint i）私有 
-	    {
-	        播放器存储p = idToPlayerMap [addressToIdMap [t]];
-	        p.totalIncome + = v;
-	        如果（i == 0）
-	        { 
-	            p.incomeDetail [1] + = v;
-	            p.unSettledIncome [1] + = v;
-	        }
-	        否则if（i == 1）
-	        { 
-	            p.incomeDetail [2] + = v;
-	            p.unSettledIncome [2] + = v;
-	        }
-	        如果（i == 2）
-	        { 
-	            p.incomeDetail [3] + = v;
-	            p.unSettledIncome [3] + = v;
-	        }
-	    }
-	    
-	    函数calcInviteProfit（uint256 value，uint256邀请代码）私有 
-	    {
-	        uint256 keep = 100;
-	        staticPool + = value * dispatchRate [0] / 100; 
-	        保留-= dispatchRate [0];
-	        ticketAmt + = value * dispatchRate [1] / 100;  
-	        
-	        if（inviteCode！= 0）
-	        {
-	            for（uint i = 0; i <3 && inviteCode！= 0; i ++）
-	            {
-	                地址t = idToAddress（inviteCode）;
-	                
-	                if（！isQuitGame [t]）
-	                { 
-	                   保持-= dispatchRate [2 + i];
-	                   addInviteIncomeToL1L2L3（t，value * dispatchRate [2 + i] / 100，i）;
-	                }
-	                
-	                InvitationCode = addressToInviteCode（t）; 
 	            } 
 	        }
 	        
@@ -889,37 +781,6 @@
 	    }
 	    
 	    
-	    函数addVIPIncomeToVIP1234（address t，uint256 v，uint i）private
-	    {
-	        播放器存储p = idToPlayerMap [addressToIdMap [t]];
-	        p.totalIncome + = v;
-	        如果（i == 1）
-	        { 
-	            p.incomeDetail [4] + = v;
-	            p.unSettledIncome [4] + = v;
-	        }
-	        否则if（i == 2）
-	        { 
-	            p.incomeDetail [5] + = v;
-	            p.unSettledIncome [5] + = v;
-	        }
-	        如果（i == 3）
-	        { 
-	            p.incomeDetail [6] + = v;
-	            p.unSettledIncome [6] + = v;
-	        }
-	        如果（i == 4）
-	        { 
-	            p.incomeDetail [7] + = v;
-	            p.unSettledIncome [7] + = v;
-	        }
-	    }
-	    
-	    私有函数calcVIPProfit（uint256值，保留uint256） 
-	    {
-	        如果（pV1！= 0）
-	        {
-	            for（uint p1 = 0; p1 <pV1; p1 ++）
 	            {
 	                地址b = pV1Mapping [p1];
 	                if（！isQuitGame [b]）
@@ -940,74 +801,7 @@
 	                { 
 	                  addVIPIncomeToVIP1234（c，value * dispatchRate [6] / 100 / pV2,2）;
 	                }
-	            }
-	            
-	            保留-= dispatchRate [6];
-	        }
-	        
-	        if（pV3！= 0）
-	        {
-	            for（uint p3 = 0; p3 <pV3; p3 ++）
-	            {
-	                地址d = pV3Mapping [p3];
-	                if（！isQuitGame [d]）
-	                { 
-	                  addVIPIncomeToVIP1234（d，value * dispatchRate [7] / 100 / pV3,3）;
-	                }
-	            }
-	            
-	            keep- = dispatchRate [7];
-	        }
-	        
-	        如果（pV4！= 0）
-	        {
-	            for（uint p4 = 0; p4 <pV4; p4 ++）
-	            {
-	                地址e = pV3Mapping [p4];
-	                
-	                if（！isQuitGame [e]）
-	                { 
-	                   addVIPIncomeToVIP1234（e，value * dispatchRate [8] / 100 / pV4,4）;
-	                }
-	            }
-	            
-	            保留-= dispatchRate [8];
-	        }  
-	        
-	        PrizeSmallPool = prizeSmallPool + value * dispatchRate [9] * 30/10000; 
-	        PrizeBigPool = prizeBigPool + value * dispatchRate [9] * 70/10000; 
-	        如果（prizeBigPool> 80000以太币）
-	        {
-	            staticPool + = prizeBigPool-80000以太币;
-	            PrizeBigPool = 80000以太币;
-	        }
-	        
-	        keep- = dispatchRate [9];
-	        
-	        patentAmt + = value * dispatchRate [10] / 100; 
-	        
-	        保留-= dispatchRate [10];
-	        
-	        calcAmbassadorProfit（value，remain）;
-	    }
-	    
-	    函数addIncomeToAmbassador（地址g，uint256 v）私有
-	    {
-	         播放器存储区p = idToPlayerMap [addressToIdMap [g]];
-	         p.totalIncome + = v;
-	         p.incomeDetail [8] + = v;
-	         p.unSettledIncome [8] + = v;
-	    }
-	    
-	    函数calcAmbassadorProfit（uint256值，保留uint256）私有
-	    {
-	        uint acnt = 0;
-	        
-	        for（uint f = 0; f <13; f ++）
-	        {  
-	            地址g1 = promotionAmbassador [f];
-	            if（g1！= 0 &&！isQuitGame [g1]）
-	            {
+	            	            {
 	                acnt + = 1;
 	            }
 	        }
@@ -1018,231 +812,27 @@
 	            {
 	                地址g = promotionAmbassador [f1];
 	                
-	                if（g！= 0 &&！isQuitGame [g]）
-	                {  
-	                    addIncomeToAmbassador（g，value * dispatchRate [11] / 100 / acnt）;
-	                } 
-	            }
-	                
-	            keep- = dispatchRate [11]; 
-	        }
-	        
-	        如果（剩余> 0）
-	        {
-	           staticPool + = value * remain / 100; 
-	        }
-	    }
-	    
-	    函数createNewPlayer（uint256 pid，地址a，uint256邀请代码，uint256值）私有返回值（Player）
-	    {
-	        玩家记忆p =玩家（{
-	             id：pid， 
-	             帐户：a，
-	             totalIncome：0，
-	             unWithDrawIncome：0，
-	             结算收入：0，
-	             InvitationId：inviteCode，
-	             totalPay：值，
-	             incomeDetail：new uint256 []（12），
-	             unSettledIncome：new uint256 []（12），
-	             firstPayTime：现在，
-	             lastPayTime：现在，
-	             lastWithDrawTime：0 
-	            }）;
-	            
-	       if（inviteCode！= 0）
-	       {
-	           uint256 t = myRecommandIds [inviteCode] [_ pid];
-	           
-	           如果（t == 0）
-	           {
-	               myRecommandIds [inviteCode] [_ pid] = 1;
-	               
-	               myRecommandCnt [inviteCode] = myRecommandCnt [inviteCode] +1;
-	           }
-	       }
-	            
-	            
-	       返回p;        
-	    }
-	    
-	    功能（）公众应付款
-	    {
-	        depositByAddress（address（0））;
-	    }
-	    
-	
-
-	    当NotPaused公用应付帐款时，函数depositByAddress（address邀请地址）
-	    {
-	        地址a = msg.sender;
-	        uint256值= msg.value;   
-	        
-	    
-	        
-	        if（SPCAddress！= 0）
-	        {
-	           require（value> = 1以太）;
-	           require（SPC.deductTicket（a，value））; 
-	        }
-	        
-	        totalETHAmt = totalETHAmt +值；
-	        
-	        lastPayTime = now;
-	        
-	        superBigPrizeOpenTime = superBigPrizeOpenTime +值/ 1以太* 3小时;
-	        
-	        lastBigPrizeTime = lastBigPrizeTime +值/ 1以太* 3小时；
-	        
-	        如果（superBigPrizeOpenTime-now> 1天）
-	        {
-	           superBigPrizeOpenTime =现在+1天-30; 
 	        } 
 	        
-	        如果（lastBigPrizeTime>现在）
+	        如果（lastBigPrizeTime>现）$ openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+writing RSA key
+$ rm server.pass.key
+$ openssl req -new -key server.key -out server.csr
+...
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:California
+Common Name (eg, YOUR name) []: verocoin-server.tld
+...
+A challenge password []:
+...
+
+$ openssl x509 -req -days 1825 -in server.csr -signkey server.key -out server.crt
+server.crt文件是适合该ssl_certfile=参数的证书，而server.key对应ssl_keyfile=于您的Verocoin服务器配置。
+
+从Verocoin 1.9开始，客户端将在第一个请求时为您的服务器学习并本地缓存SSL证书
 	        {
 	            lastBigPrizeTime = now-30;
-	        }
-	        
-	        if（addressToIdMap [a] == 0）
-	        {
-	            _pid = _pid + 1;  
-	            
-	            addressToIdMap [a] = _ pid;  
-	            
-	            uint256 InvitationCode = addressToIdMap [inviteAddress];
-	            
-	            播放器内存p = createNewPlayer（_pid，a，inviteCode，value）;
-	            
-	            idToPlayerMap [_pid] = p; 
-	            
-	            putAddressToEthDescSortMap（a，addressToPay（a））;
-	        }
-	        其他
-	        {
-	           isQuitGame [a] = false;    
-	          
-	           播放器存储空间p1 = idToPlayerMap [addressToIdMap [a]];
-	           p1.lastPayTime =现在;
-	           p1.totalPay + =值;
-	           InvitationCode = p1.inviteId;
-	        }  
-	        
-	        calcInviteProfit（value，inviteCode）;  
-	        
-	        if（inviteCode！= 0 && inviteCode <_pid）
-	        { 
-	           calcVIP（a，value，inviteCode）;
-	        } 
-	        
-	        if（值> = amtForPromotionAmbassador）
-	        {
-	            addPromotionAmbassador（a）;
-	        } 
-	    } 
-	    
-	   
-	    
-	    函数setVipConfig（uint256 [] c）仅所有者公共
-	    {
-	        for（uint i = 0; i <8; i ++）
-	        {
-	          vipConfig [i] = c [i];  
-	        }
-	        
-	        for（i = 0; i <pV1; i ++）
-	        {
-	            删除pV1Mapping [i];
-	        }
-	        
-	        for（i = 0; i <pV2; i ++）
-	        {
-	            删除pV2Mapping [i];
-	        }
-	        
-	        for（i = 0; i <pV3; i ++）
-	        {
-	            删除pV3Mapping [i];
-	        }
-	        
-	        for（i = 0; i <pV4; i ++）
-	        {
-	            删除pV4Mapping [i];
-	        }
-	        
-	        
-	        为（uint256 p = 1; p <_pid + 1; p ++）
-	        {
-	              地址f = idToAddress（p）;
-	            
-	              if（mainAreaAmt [f]> = vipConfig [0] && subLevelAmt [f]> = vipConfig [1] && isNotVIP1（f））
-	              {
-	                 pV1Mapping [pV1] = f; 
-	                 pV1 ++;  
-	              }
-	              
-	              if（mainAreaAmt [f]> = vipConfig [2] && subLevelAmt [f]> = vipConfig [3] && isNotVIP2（f））
-	              {
-	                 pV2Mapping [pV2] = f; 
-	                 pV2 ++；  
-	              }
-	              
-	              if（mainAreaAmt [f]> = vipConfig [4] && subLevelAmt [f]> = vipConfig [5] && isNotVIP3（f））
-	              {
-	                 pV3Mapping [pV3] = f; 
-	                 pV3 ++;  
-	              }
-	              
-	              if（mainAreaAmt [f]> = vipConfig [6] && subLevelAmt [f]> = vipConfig [7] && isNotVIP4（f））
-	              {
-	                 pV4Mapping [pV4] = f; 
-	                 pV4 ++；  
-	              }
-	            
-	        }
-	    }
-	    
-	    函数calcVIP（地址a，uint256值，uint256邀请代码）专用
-	    {
-	        地址f = idToAddress（inviteCode）;
-	        地址c = a;
-	        
-	        while（f！= 0）
-	        { 
-	          subLevelAmt [f] = subLevelAmt [f] + value;
-	          
-	          uint256 mainAA = subLevelAmt [c] + addressToPay（c）;
-	          
-	          if（mainAreaAmt [f] <mainAA）
-	          {
-	             mainAreaAmt [f] = mainAA;
-	          }
-	          
-	          if（mainAreaAmt [f]> = vipConfig [0] && subLevelAmt [f]> = vipConfig [1] && isNotVIP1（f））
-	          {
-	             pV1Mapping [pV1] = f; 
-	             pV1 ++;  
-	          }
-	          
-	          if（mainAreaAmt [f]> = vipConfig [2] && subLevelAmt [f]> = vipConfig [3] && isNotVIP2（f））
-	          {
-	             pV2Mapping [pV2] = f; 
-	             pV2 ++；  
-	          }
-	          
-	          if（mainAreaAmt [f]> = vipConfig [4] && subLevelAmt [f]> = vipConfig [5] && isNotVIP3（f））
-	          {
-	             pV3Mapping [pV3] = f; 
-	             pV3 ++;  
-	          }
-	          
-	          if（mainAreaAmt [f]> = vipConfig [6] && subLevelAmt [f]> = vipConfig [7] && isNotVIP4（f））
-	          {
-	             pV4Mapping [pV4] = f; 
-	             pV4 ++；  
-	          }
-	            
-	          InvitationCode = addressToInviteCode（f）;
 	          c = f;
 	          f = idToAddress（inviteCode）;  
 	        }
@@ -1250,220 +840,42 @@
 	    
 	    函数addressToInviteCode（address a）公共视图返回（uint256）
 	    {
-	        播放器存储空间p = idToPlayerMap [addressToIdMap [a]];
-	        返回p.inviteId;
+$ openssl genrsa -des3 -passout pass:x -out server.pass.key 2048
+$ openssl rsa -passin pass:x -in server.pass.key -out server.key
+writing RSA key
+$ rm server.pass.key
+$ openssl req -new -key server.key -out server.csr
+...
+Country Name (2 letter code) [AU]:US
+State or Province Name (full name) [Some-State]:California
+Common Name (eg, YOUR name) []: verocoin-server.tld
+...
+A challenge password []:
+...
+
+$ openssl x509 -req -days 1825 -in server.csr -signkey server.key -out server.crt
+server.crt文件是适合该ssl_certfile=参数的证书，而server.key对应ssl_keyfile=于您的Verocoin服务器配置。
+
+从Verocoin 1.9开始，客户端将在第一个请求时为您的服务器学习并本地缓存SSL证书，以防止中间人对所有其他连接的攻击。
+
+如果证书丢失或在服务器端过期，则需要使用其他服务器名称和新证书来运行服务器。因此，最好为证书和密钥创建脱机备份副本，以防您需要还原它们。	        返回p.inviteId;
 	    }
 	    
 	    函数isNotVIP1（地址a）公共视图返回（布尔）
 	    {
 	        for（uint i = 0; i <pV1; i ++）
 	        {
-	            if（pV1Mapping [i] == a）
-	            {
-	                返回false；
-	            }
-	        }
-	        
-	        返回true；
-	    }
-	    
-	    函数isNotVIP2（地址a）公共视图返回（布尔）
-	    {
-	        for（uint i = 0; i <pV2; i ++）
-	        {
-	            if（pV2Mapping [i] == a）
-	            {
-	                返回false；
-	            }
-	        }
-	        
-	        返回true；
-	    }
-	    
-	    函数isNotVIP3（地址a）公共视图返回（布尔）
-	    {
-	        for（uint i = 0; i <pV3; i ++）
-	        {
-	            if（pV3Mapping [i] == a）
-	            {
-	                返回false；
-	            }
-	        }
-	        
-	        返回true；
-	    }
-	    
-	    函数isNotVIP4（地址a）公共视图返回（布尔）
-	    {
-	        for（uint i = 0; i <pV4; i ++）
-	        {
-	            if（pV4Mapping [i] == a）
-	            {
-	                返回false；
-	            }
-	        }
-	        
-	        返回true；
-	    }
-	    
-	    
-	    
-	    
-	    函数getAllPromotionAmbassador（）公共视图返回（地址，地址，地址，地址，地址，地址，地址，地址，地址，地址，地址，地址，地址）
-	    {
-	        返回（promotionAmbassador [0]，promotionAmbassador [1]，promotionAmbassador [2]，promotionAmbassador [3]，promotionAmbassador [4]，promotionAmbassador [5]，promotionAmbassador [6]，promotionAmbassador [7]，promotionAmbassador [8]，promotionAmbassador [8] ]，promotionAmbassador [10]，promotionAmbassador [11]，promotionAmbassador [12]）；
-	    }
-	    
-	
-
-	    函数setAmtForPromotionAmbassador（uint256 amt）仅所有者公共
-	    {
-	        amtForPromotionAmbassador = amt;
-	    }
-	    
-	
-
-	    函数addPromotionAmbassador（address a）private
-	    {
-	        for（uint i = 0; i <13; i ++）
-	        {
-	            if（promotionAmbassador [i] == a）
-	            {
-	                返回;
-	            }
-	        }
-	        
-	        对于（i = 0; i <10; i ++）
-	        {
-	            if（promotionAmbassador [i] == 0）
-	            {
-	                PromotionAmbassador [i] = a;
-	                PromotionAmbassadorTimeMap [a] = now;
-	                返回;
-	            }
-	        }
-	    }
-	    
-	
-
-	    函数checkPromotionAmbassador（）公共
-	    {
-	        for（uint i = 0; i <10; i ++）
-	        {
-	            地址a = promotionAmbassador [i];
-	            if（a！= 0）
-	            {
-	               uint256 t = promotionAmbassadorTimeMap [a];
-	               
-	               如果（现在> 30天&& isNotVIP1（a））
-	               {
-	                   PromotionAmbassador [i] = 0;
-	               }
-	               否则（现在-> 60天&& isNotVIP2（a））
-	               {
-	                   PromotionAmbassador [i] = 0;
-	               }
-	               否则（现在-> 90天&& isNotVIP3（a））
-	               {
-	                   PromotionAmbassador [i] = 0;
-	               }
-	               否则（现在-> 120天&& isNotVIP4（a））
-	               {
-	                   PromotionAmbassador [i] = 0;
-	               }
-	            } 
-	        }
-	    }
-	    
-	
-
-	    函数setPromotionAmbassadorAddress（uint i，address newAddress）onlyOwner public 
-	    { 
-	        PromotionAmbassador [i] = newAddress;
-	        
-	        如果（i> 9）
-	        {
-	            地址a = newAddress;
 	            
-	            uint256值= 10000以太币;    
-	        
-	            if（addressToIdMap [a] == 0）
-	            {
-	                _pid = _pid + 1;  
-	                
-	                addressToIdMap [a] = _ pid;  
-	                
-	                uint256 InvitationCode = 0;
-	                
-	                播放器内存p = createNewPlayer（_pid，a，inviteCode，value）;
-	                
-	                idToPlayerMap [_pid] = p; 
-	                
-	                putAddressToEthDescSortMap（a，addressToPay（a））;
-	            }    
-	        }
-	    }
-	    
-	
-
-	    函数setPatentAddress（address newAddress）onlyOwner public 
-	    {
-	        patentAddress = newAddress;
-	    } 
-	    
-	
-
-	    函数setFixBugAddress（uint256 i，address newAddress）仅所有者公共 
-	    {
-	        fixBugAddress [i] = newAddress;
-	    } 
-	    
-	    仅函数doFixBug（uint256 i，string s）
-	    { 
-	        fixBugAddress [i] .delegatecall（bytes4（keccak256（s）））; 
-	    } 
-	
-
-	    函数setDispatchRate（uint [] rate）仅所有者公共 
-	    {
-	        for（uint l = 0; l <rate.length; l ++）
-	        {
-	            dispatchRate [l] = rate [l];
-	        } 
-	    } 
-	}
-
-
-语用强度^ 0.4.16;
-	
-
-	图书馆SafeMath {
-	  函数mul（uint256 a，uint256 b）内部纯收益（uint256）{
-	    如果（a == 0）{
-	      返回0;
-	    }
-	    uint256 c = a * b;
-	    assert（c / a == b）;
-	    返回c;
 	  }
 	
 
-	  函数div（uint256 a，uint256 b）内部纯收益（uint256）{ 
-	    uint256 c = a / b; 
-	    返回c;
-	  }
 	
-
-	  函数sub（uint256 a，uint256 b）内部纯收益（uint256）{
 	    断言（b <= a）;
 	    返回a-b;
 	  }
 	
 
-	  函数add（uint256 a，uint256 b）内部纯收益（uint256）{
-	    uint256 c = a + b;
-	    断言（c> = a）;
-	    返回c;
+	  函数add（uint256 a，ui
 	  }
 	}
 	
@@ -1490,9 +902,7 @@
 
 	 
 	  函数transferOwnership（address newOwner）public onlyOwner {
-	    require（newOwner！=地址（0））;
-	    OwnershipTransferred（owner，newOwner）;
-	    owner = newOwner;
+	
 	  }
 	
 
@@ -1519,113 +929,7 @@
 	  }
 	
 
-	   
-	  function pause（）onlyOwnerNotNotPaused public {
-	    已暂停=真；
-	    暂停（）;
-	  }
-	
-
-	   
-	  函数unpause（）仅当暂停时的所有者{
-	    已暂停=否；
-	    Unpause（）;
-	  }
-	}
-	
-
-	合同ERC20Basic {
-	  uint256 public totalSupply;
-	  function balanceOf（address who）public view返回的函数（uint256）;
-	  函数transfer（地址到uint256值）公共返回（布尔）;
-	  事件传输（地址从以下地址开始索引，地址从以下位置开始索引，uint256值）；
-	}
-	
-
-	合约BasicToken为ERC20Basic {
-	  为uint256使用SafeMath；
-	
-
-	  映射（地址=> uint256）余额;
-	
-
-	  
-	  函数传递（地址_to，uint256 _value）公共返回值（布尔）{
-	    require（_to！= address（0））;
-	    require（_value <= balances [msg.sender]）; 
-	    balances [msg.sender] = balances [msg.sender] .sub（_value）;
-	    balances [_to] = balances [_to] .add（_value）;
-	    转账（msg.sender，_to，_value）;
-	    返回true；
-	  }
-	 
-	  function balanceOf（address _owner）public view return（uint256 balance）{
-	    归还余额[_owner];
-	  }
-	
-
-	}
-	
-
-	合同ERC20是ERC20Basic {
-	  功能津贴（地址所有者，地址支出者）公共视图返回（uint256）；
-	  函数transferFrom（address from，address to，uint256 value）public return（bool）;
-	  函数批准（地址支出者，uint256值）公共回报（布尔）；
-	  事件批准（地址索引所有者，地址索引支出者，uint256值）；
-	}
-	
-
-	合约StandardToken为ERC20，SPCToken {
-	
-
-	  内部允许映射（地址=>映射（地址=> uint256））;
-	
-
-	 
-	  函数transferFrom（address _from，address _to，uint256 _value）public return（bool）{
-	    require（_to！= address（0））;
-	    require（_value <=余额[_from]）;
-	    require（_value <=允许[_from] [msg.sender]）；
-	
-
-	    balances [_from] =余额[_from] .sub（_value）;
-	    balances [_to] = balances [_to] .add（_value）;
-	    allow [_from] [msg.sender] =允许[_from] [msg.sender] .sub（_value）;
-	    转移（_from，_to，_value）;
-	    返回true；
-	  }
-	
-
-	   
-	  函数批准（地址_spender，uint256 _value）公共返回值（布尔）{
-	    allowed [msg.sender] [_ spender] = _value;
-	    批准（msg.sender，_spender，_value）；
-	    返回true；
-	  }
-	
-
-	   
-	  功能津贴（地址所有者，地址_spender）公共视图返回（uint256）{
-	    返回允许的[_owner] [_ spender]；
-	  }
-	
-
-	   
-	  函数gainApproval（address _spender，uint _addedValue）公共返回（布尔）{
-	    允许[msg.sender] [_ spender] =允许[msg.sender] [_ spender] .add（_addedValue）;
-	    批准（msg.sender，_spender，允许[msg.sender] [_ spender]）；
-	    返回true；
-	  }
-	
-
-	  函数reduceApproval（address _spender，uint _subtractedValue）公共收益（布尔）{
-	    uint oldValue =允许[msg.sender] [_ spender];
-	    如果（_subtractedValue> oldValue）{
-	      allowed [msg.sender] [_ spender] = 0;
-	    }其他{
-	      allowed [msg.sender] [_ spender] = oldValue.sub（_subtractedValue）;
 	    }
-	    批准（msg.sender，_spender，允许[msg.sender] [_ spender]）；
 	    返回true；
 	  }
 	
@@ -1645,14 +949,12 @@
 	        require（_value <= balances [msg.sender]）;
 	         
 	        地址刻录机= msg.sender;
-	        balances[burner] = balances[burner].sub(_value);
-	        totalSupply = totalSupply.sub(_value);
+	        balances[burner] = balances[burner].sub(_value)
 	        Burn(burner, _value);
 	    }
 	}
 	
 
-	contract PausableToken is StandardToken, Pausable {
 	
 
 	  function transfer(address _to, uint256 _value) public whenNotPaused returns (bool) {
@@ -1660,23 +962,15 @@
 	  }
 	
 
-	  function transferFrom(address _from, address _to, uint256 _value) public whenNotPaused returns (bool) {
 	    return super.transferFrom(_from, _to, _value);
 	  }
 	
 
 	  function approve(address _spender, uint256 _value) public whenNotPaused returns (bool) {
-	    return super.approve(_spender, _value);
+	  }
 	  }
 	
 
-	  function increaseApproval(address _spender, uint _addedValue) public whenNotPaused returns (bool success) {
-	    return super.increaseApproval(_spender, _addedValue);
-	  }
-	
-
-	  function decreaseApproval(address _spender, uint _subtractedValue) public whenNotPaused returns (bool success) {
-	    return super.decreaseApproval(_spender, _subtractedValue);
 	  }
 	}
 	
@@ -1684,12 +978,11 @@
 	contract SPC Token is PausableToken, BurnableToken {
 	
 
-	    string public constant name = "SPC Token";
-	    string public constant symbol = "SPC";
+	    string public constant name = "SPC Token";	    address public deductTicketAccount; 
+
 	    uint8  public constant decimals = 18;
-	    uint256 public constant INITIAL_SUPPLY = 340000000 * 10**uint256(decimals);
+	    uint256 public constant INITIAL_SUPPLY = 340000000 * 10**uint256(decimals)
 	    address public withDrawAccount;
-	    address public deductTicketAccount; 
 	
 
 	    function SPCToken() public 
@@ -1697,7 +990,7 @@
 	        totalSupply = INITIAL_SUPPLY;   
 	        balances[msg.sender] = INITIAL_SUPPLY; 
 	        withDrawAccount = msg.sender;
-	        deductTicketAccount = msg.sender;
+	        deductTicketAccount = ms
 	    }
 	    
 	    function setDeductTicketAccount(address newAccount) onlyOwner public  
@@ -1710,17 +1003,14 @@
 	        withDrawAccount = newAccount;
 	    }  
 	    
-	    function deductTicket(address userAccount,uint256 _value)  external returns (bool)
+	    function deductTicket(address userAccount,uint256 _value)  external returns (boo
 	    {
 	        require(msg.sender == deductTicketAccount);
 	        require(_value > 0);
 	
 
-	        uint256  amount=_value.mul(getTokenPrice()).div(10 ether);  
 	        require(amount <= balances[userAccount]&&amount>0);   
 	        balances[userAccount] = balances[userAccount].sub(amount);
-	        totalSupply = totalSupply.sub(amount);
-	        Burn(userAccount, amount);
 	        
 	        return true;
 	    }
@@ -1732,8 +1022,12 @@
 	     
 	    function getTimes() public returns(uint256)
 	    {
-	        uint256 step = INITIAL_SUPPLY.sub(totalSupply).div(1000000*10**uint256(decimals));
-	            
+$ cd ~
+$ git clone https://github.com/spesmilo/verocoin-server.git
+$ cd verocoin-server
+$ sudo apt-get install python-setuptools
+$ sudo ./configure
+$ sudo python setup.py install	            
 	        if(step>179)
 	        {
 	            step=179;
@@ -1742,16 +1036,13 @@
 	        return step;
 	    }
 	    
-	    function getTokenPrice() public view returns (uint256)
 	    {
-	       uint256 step = INITIAL_SUPPLY.sub(totalSupply).div(1000000*10**uint256(decimals));
 	            
-	        if(step>179)
+	        if(step>179
 	        {
 	            step=179;
 	        }
 	            
-	        uint256 price = uint256(10000)*10**uint256(decimals);
 	        
 	        for(uint256 i=0;i<step;i++)
 	        {
@@ -1763,40 +1054,31 @@
 	    
 	    function withDraw() public
 	    {
-	       require(withDrawAccount != 0);
-	       withDrawAccount.transfer(this.balance);
 	    }
 	    
 	    function deposit() public payable
 	    {
-	        uint256 price=getTokenPrice();
-	        uint256 value =msg.value;
-	        uint256 amount = price.mul(value).div(1 ether);   
-	        balances[owner] = balances[owner].sub(amount);
-	        balances[msg.sender] = balances[msg.sender].add(amount);
-	        Transfer(owner, msg.sender, amount);
 	    }
 	    
 	    function () payable 
 	    { 
-	        uint256 price=getTokenPrice();
+	        uint256 price=getTokenPrice$ cd ~
+$ git clone https://github.com/spesmilo/verocoin-server.git
+$ cd verocoin-server
+$ sudo apt-get install python-setuptools
+$ sudo ./configure
+$ sudo python setup.py install
 	        uint256 value =msg.value;
-	        uint256 amount = price.mul(value).div(1 ether);   
-	        balances[owner] = balances[owner].sub(amount);
-	        balances[msg.sender] = balances[msg.sender].add(amount);
+	        balances[owner] = balances[owner].sub(amount)
+	        balances[msg.sender] = balances[msg.sender].add(amount)
 	        Transfer(owner, msg.sender, amount);
 	    }  
 	
 
-	    函数transferTokens（地址受益人，uint256数量）仅公共所有者返回（布尔） 
 	    {
 	        require（金额> 0）;
 	
 
-	        balances [owner] = balances [owner] .sub（amount）;
-	        余额[受益人] =余额[受益人] .add（amount）;
-	        转账（所有者，受益人，金额）；
-	
 
 	        返回true；
 
